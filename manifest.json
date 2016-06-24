@@ -9,8 +9,13 @@
     "scripts": ["background.js"]
   },
 
+  "options_ui": {
+    "page": "options/options.html"
+  },
+
   "permissions": [
     "http://*/*",
-    "activeTab"
+    "activeTab",
+    "storage"
   ]
 }

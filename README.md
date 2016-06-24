@@ -11,4 +11,5 @@ A browser extension that plays a song when your HTTP server is down.
 ## Limitations ##
 
 * it's a WIP
-* currently works only in Chrome
+* only one configurable address
+* probably works only in Chrome
