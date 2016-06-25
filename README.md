@@ -13,3 +13,7 @@ A browser extension that plays a song when your HTTP server is down.
 * it's a WIP
 * only one configurable address
 * probably works only in Chrome
+
+## Credit ##
+* it was all an idea of @xBajci
+* icon made by [Jeanette Foshee] (https://sites.google.com/site/jeanettefoshee/)
