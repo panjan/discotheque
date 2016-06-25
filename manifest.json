@@ -2,7 +2,7 @@
   "description": "A browser extension that plays a song when your HTTP server is down.",
   "manifest_version": 2,
   "name": "Discotheque",
-  "version": "0.1",
+  "version": "0.0.0.1",
   "homepage_url": "https://github.com/panjan/discotheque",
 
   "icons": {
