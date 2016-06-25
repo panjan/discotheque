@@ -2,6 +2,8 @@
 
 A browser extension that plays a song when your HTTP server is down.
 
+[AVAILABLE ON CHROME] (https://chrome.google.com/webstore/detail/discotheque/dgdenkmmheancojbadfmfnmikekmbbik)
+
 ## What it does ##
 
 * polls given URL and checks for HTTP status 200
