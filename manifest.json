@@ -6,7 +6,9 @@
   "homepage_url": "https://github.com/panjan/discotheque",
 
   "icons": {
-    "48": "icons/disco-stu.png"
+    "32": "icons/disco-stu-32.png",
+    "48": "icons/disco-stu-48.png",
+    "128": "icons/disco-stu-128.png"
   },
 
   "background": {
