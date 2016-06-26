@@ -12,7 +12,7 @@ A browser extension that plays a song when your HTTP server is down.
 
 ## How to use it ##
 
-1. click on the ![Disco Stu](icons/disco-stu.png) icon and select "Options"
+1. click on the ![Disco Stu](icons/disco-stu-32.png) icon and select "Options"
 2. fill in the URL you want to monitor
 3. hit the "Save" button
 4. Done!
