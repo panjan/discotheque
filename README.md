@@ -26,7 +26,7 @@ You can optionally change the song URL and polling interval.
 * probably works only in Chrome
 
 ## Credit ##
-* it was all an idea of [xBajci] (https://github.com/xBajci)
+* it was all an idea of [xBajci] (https://github.com/xBajci) and [petrSchreiber] (https://github.com/petrSchreiber)
 * icon made by [Jeanette Foshee] (https://sites.google.com/site/jeanettefoshee/)
 
 ## Disclaimer ##
