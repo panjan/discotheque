@@ -136,6 +136,7 @@ input {
   margin: 0 -1px;
   padding: 12px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .panel-section-footer-button > .text-shortcut {
