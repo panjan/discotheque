@@ -10,12 +10,7 @@ function save_options() {
     targetAddress: targetAddress,
     pollingInterval: pollingInterval
   }, function() {
-    // Update status to let user know options were saved.
-    var status = document.getElementById('status');
-    status.textContent = 'Options saved.';
-    setTimeout(function() {
-      status.value = '';
-    }, 750);
+      window.close();
   });
 }
 
@@ -35,4 +30,8 @@ document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener(
   'click',
   save_options
+);
+document.getElementById('cancel').addEventListener(
+  'click',
+  () => window.close()
 );

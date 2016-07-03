@@ -2,33 +2,29 @@
 <html>
 <head>
   <title>Discotheque settings</title>
-  <style>
-    body: { padding: 10px; }
-  </style>
+  <link rel="stylesheet" href="../panels.css"/>
 </head>
 
 <body>
-  <div>
-    URL to watch:
-    <label>
-      <input id="watch" type="url">
-    </label>
-  </div>
-  <div>
-    Song URL:
-    <label>
-      <input id="open" type="url">
-    </label>
-  </div>
-  <div>
-    Polling interval in seconds (needs restart):
-    <label>
-      <input id="interval" type="number" min="1">
-    </label>
-  </div>
+  <div class="panel">
+    <div class="panel-section panel-section-formElements">
+      <div class="panel-formElements-item">
+        <label for="watch">URL to watch:</label><input value="foo" id="watch" type="url">
+      </div>
+      <div class="panel-formElements-item">
+        <label for="open">Song URL:</label><input value="foo" id="open" type="url">
+      </div>
+      <div class="panel-formElements-item">
+        <label for="interval">Polling interval in secs (needs restart):</label><input value="foo" id="interval" type="number" min="1">
+      </div>
+    </div>
 
-  <div id="status"></div>
-  <button id="save">Save</button>
+    <div class="panel-section panel-section-footer">
+      <div id="cancel" class="panel-section-footer-button">Cancel</div>
+      <div class="panel-section-footer-separator"></div>
+      <div id="save" class="panel-section-footer-button default">Confirm</div>
+    </div>
+  </div>
 
   <script src="options.js"></script>
 </body>

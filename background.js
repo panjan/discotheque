@@ -16,7 +16,8 @@ function respondsWith200(url) {
 function openWindow(targetAddress) {
   var createData = {
     url: targetAddress,
-    focused: true
+    focused: true,
+    type: 'popup'
   };
   chrome.windows.create(
     createData,
@@ -27,13 +28,14 @@ function openWindow(targetAddress) {
 function poll() {
   chrome.storage.local.get({
     address: 'http://foo.bar/baz',
-    targetAddress: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY'
+    targetAddress: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY',
+    active: false
   },
-                          (config) => checkStatus(config));
+                           (config) => checkStatus(config));
 }
 
 function checkStatus(config) {
-  if(respondsWith200(config.address)) {
+  if(!config.active || respondsWith200(config.address)) {
     if(windowId !== null) {
       chrome.windows.remove(windowId);
       windowId = null;
@@ -45,6 +47,6 @@ function checkStatus(config) {
 }
 
 chrome.storage.local.get({ pollingInterval: 60 },
-                        (config) => {
-                          setInterval(poll, config.pollingInterval * 1000);
-                        });
+                         (config) => {
+                           setInterval(poll, config.pollingInterval * 1000);
+                         });

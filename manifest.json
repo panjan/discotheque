@@ -5,6 +5,11 @@
   "version": "0.0.1.0",
   "homepage_url": "https://github.com/panjan/discotheque",
 
+  "browser_action": {
+    "default_title": "Discotheque",
+    "default_popup": "popup/popup.html"
+  },
+
   "icons": {
     "32": "icons/disco-stu-32.png",
     "48": "icons/disco-stu-48.png",
