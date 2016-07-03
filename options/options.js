@@ -5,7 +5,7 @@ function save_options() {
   var targetAddress = document.getElementById('open').value;
   var pollingInterval = document.getElementById('interval').value;
 
-  chrome.storage.sync.set({
+  chrome.storage.local.set({
     address: address,
     targetAddress: targetAddress,
     pollingInterval: pollingInterval
@@ -20,7 +20,7 @@ function save_options() {
 }
 
 function restore_options() {
-  chrome.storage.sync.get({
+  chrome.storage.local.get({
     address: 'http://foo.bar/baz',
     targetAddress: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY',
     pollingInterval: 60

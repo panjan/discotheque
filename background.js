@@ -25,7 +25,7 @@ function openWindow(targetAddress) {
 }
 
 function poll() {
-  chrome.storage.sync.get({
+  chrome.storage.local.get({
     address: 'http://foo.bar/baz',
     targetAddress: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY'
   },
@@ -44,7 +44,7 @@ function checkStatus(config) {
   }
 }
 
-chrome.storage.sync.get({ pollingInterval: 60 },
+chrome.storage.local.get({ pollingInterval: 60 },
                         (config) => {
                           setInterval(poll, config.pollingInterval * 1000);
                         });
