@@ -7,7 +7,7 @@ function respondsWith200(url) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open('GET', url, false);
     xmlHttp.send(null);
-    return xmlHttp.status === 200;
+    return xmlHttp.status === 200 || xmlHttp.status === 204;
   } catch (e) {
     return false;
   }
