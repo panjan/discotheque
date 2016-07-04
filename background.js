@@ -35,14 +35,21 @@ function poll() {
 }
 
 function checkStatus(config) {
-  if(!config.active || respondsWith200(config.address)) {
+  if(!config.active) return;
+  if(respondsWith200(config.address)) {
+    chrome.browserAction.setBadgeText({ text: 'OK' });
+    chrome.browserAction.setBadgeBackgroundColor({ color: '#5cb85c' });
     if(windowId !== null) {
       chrome.windows.remove(windowId);
       windowId = null;
     }
   }
-  else if (windowId === null) {
-    openWindow(config.targetAddress);
+  else {
+    chrome.browserAction.setBadgeText({ text: 'N/A' });
+    chrome.browserAction.setBadgeBackgroundColor({ color: '#dd3f3a' });
+    if (windowId === null) {
+      openWindow(config.targetAddress);
+    }
   }
 }
 
