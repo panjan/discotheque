@@ -10,7 +10,11 @@ function toggleActive() {
     var newValue = !items.active;
     chrome.storage.local.set({ active: newValue });
     setToggleActiveText(newValue);
-    if(!newValue) chrome.browserAction.setBadgeText({ text: '' });
+    if(newValue) {
+      chrome.runtime.getBackgroundPage((background) => background.poll());
+    } else {
+      chrome.browserAction.setBadgeText({ text: '' });
+    }
     window.close();
   });
 }
