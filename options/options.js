@@ -10,6 +10,7 @@ function save_options() {
     targetAddress: targetAddress,
     pollingInterval: pollingInterval
   }, function() {
+      chrome.runtime.getBackgroundPage((background) => background.setActive(true));
       window.close();
   });
 }

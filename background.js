@@ -25,13 +25,15 @@ function openWindow(targetAddress) {
   );
 }
 
-function poll() {
-  chrome.storage.local.get({
-    address: 'http://foo.bar/baz',
-    targetAddress: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY',
-    active: false
-  },
-                           (config) => checkStatus(config));
+function setActive(newValue) {
+  chrome.storage.local.set({ active: newValue }, () => {
+    if(newValue) {
+      poll();
+    } else {
+      clearInterval(interval);
+      chrome.browserAction.setBadgeText({ text: '' });
+    }
+  });
 }
 
 function checkStatus(config) {
@@ -53,7 +55,21 @@ function checkStatus(config) {
   }
 }
 
-chrome.storage.local.get({ pollingInterval: 60 },
-                         (config) => {
-                           setInterval(poll, config.pollingInterval * 1000);
-                         });
+var interval = null;
+function poll() {
+  clearInterval(interval);
+  chrome.storage.local.get({
+    address: 'http://foo.bar/baz',
+    targetAddress: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY',
+    pollingInterval: 60,
+    active: false
+  },
+                           (config) => {
+                             if(!config.active) return;
+                             checkStatus(config);
+                             var intervalInSeconds = config.pollingInterval * 1000;
+                             interval = setInterval(checkStatus, intervalInSeconds, config);
+                           });
+}
+
+poll();
