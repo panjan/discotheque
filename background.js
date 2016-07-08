@@ -36,22 +36,37 @@ function setActive(newValue) {
   });
 }
 
+function setNA(targetAddress) {
+  chrome.browserAction.setBadgeText({ text: 'N/A' });
+  chrome.browserAction.setBadgeBackgroundColor({ color: '#dd3f3a' });
+  if (windowId === null) {
+    openWindow(targetAddress);
+  }
+}
+
+function setOK() {
+  chrome.browserAction.setBadgeText({ text: 'OK' });
+  chrome.browserAction.setBadgeBackgroundColor({ color: '#5cb85c' });
+  if(windowId !== null) {
+    chrome.windows.remove(windowId);
+    windowId = null;
+  }
+}
+
 function checkStatus(config) {
   if(!config.active) return;
-  if(respondsWith200(config.address)) {
-    chrome.browserAction.setBadgeText({ text: 'OK' });
-    chrome.browserAction.setBadgeBackgroundColor({ color: '#5cb85c' });
-    if(windowId !== null) {
-      chrome.windows.remove(windowId);
-      windowId = null;
+  var unavailableAddresses = [];
+  for(var address of config.addresses) {
+    if(!respondsWith200(address)) {
+      unavailableAddresses.push(address);
     }
   }
+
+  if(unavailableAddresses.length > 0) {
+    setNA(config.targetAddress);
+  }
   else {
-    chrome.browserAction.setBadgeText({ text: 'N/A' });
-    chrome.browserAction.setBadgeBackgroundColor({ color: '#dd3f3a' });
-    if (windowId === null) {
-      openWindow(config.targetAddress);
-    }
+    setOK();
   }
 }
 
@@ -59,7 +74,7 @@ var interval = null;
 function poll() {
   clearInterval(interval);
   chrome.storage.local.get({
-    address: 'http://foo.bar/baz',
+    addresses: [],
     targetAddress: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY',
     pollingInterval: 60,
     active: false
