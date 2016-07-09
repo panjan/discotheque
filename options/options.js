@@ -32,6 +32,7 @@ function createAddressInputElement(address) {
   var input = document.createElement('input');
   input.setAttribute('name', 'address');
   input.setAttribute('type', 'url');
+  input.setAttribute('placeholder', 'https://foo.bar/baz');
   input.value = address;
   var addressContainer = document.createElement('div');
   addressContainer.setAttribute('class', 'panel-formElements-item');
@@ -57,13 +58,14 @@ function createAddButtonElement() {
 
 function restore_options() {
   chrome.storage.local.get({
-    addresses: ['http://foo.bar/baz'],
+    addresses: [],
     targetAddress: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY',
     pollingInterval: 60
   }, function(items) {
     document.getElementById('open').value = items.targetAddress;
     document.getElementById('interval').value = items.pollingInterval;
     var addressesContainer = document.getElementById('addresses');
+    if(items.addresses.length === 0) items.addresses.push('');
     for(var address of items.addresses) {
       var addressInput = createAddressInputElement(address);
       addressesContainer.appendChild(addressInput);
