@@ -25,17 +25,6 @@ function openWindow(targetAddress) {
   );
 }
 
-function setActive(newValue) {
-  chrome.storage.local.set({ active: newValue }, () => {
-    if(newValue) {
-      poll();
-    } else {
-      clearInterval(interval);
-      chrome.browserAction.setBadgeText({ text: '' });
-    }
-  });
-}
-
 function setNA(targetAddress) {
   chrome.browserAction.setBadgeText({ text: 'N/A' });
   chrome.browserAction.setBadgeBackgroundColor({ color: '#dd3f3a' });
@@ -54,7 +43,6 @@ function setOK() {
 }
 
 function checkStatus(config) {
-  if(!config.active) return;
   var unavailableAddresses = [];
   for(var address of config.addresses) {
     if(!respondsWith200(address)) {
@@ -76,15 +64,15 @@ function poll() {
   chrome.storage.local.get({
     addresses: [],
     targetAddress: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY',
-    pollingInterval: 60,
-    active: false
+    pollingInterval: 60
   },
                            (config) => {
-                             if(!config.active) return;
+                             if(config.addresses.length === 0) return;
                              checkStatus(config);
                              var intervalInSeconds = config.pollingInterval * 1000;
                              interval = setInterval(checkStatus, intervalInSeconds, config);
                            });
 }
 
+chrome.browserAction.onClicked.addListener(() => chrome.runtime.openOptionsPage());
 poll();

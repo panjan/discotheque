@@ -6,8 +6,7 @@
   "homepage_url": "https://github.com/panjan/discotheque",
 
   "browser_action": {
-    "default_title": "Discotheque",
-    "default_popup": "popup/popup.html"
+    "default_title": "Discotheque"
   },
 
   "icons": {
