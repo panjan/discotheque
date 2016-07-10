@@ -1,0 +1,55 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  color: red;
+  background: rgba(0,0,0,0.7);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#errors-overlay {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+
+#errors {
+  font-weight: bold;
+  font-size: 3em;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+@keyframes wobbling {
+  50% {
+    transform: translateY(-13px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.wobbling {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  backface-visibility: hidden;
+
+  animation-name: wobbling;
+  animation-duration: 1.25s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}

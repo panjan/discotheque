@@ -1,6 +1,16 @@
 'use strict';
 
 var windowId = null;
+var interval = null;
+var errors = null;
+
+function toggleToolbar() {
+  chrome.tabs.getSelected(windowId, (tab) => {
+    setTimeout(() => {
+      chrome.tabs.sendMessage(tab.id, { name: 'toggle-in-page-toolbar' });
+    }, 2000);
+  });
+}
 
 function respondsWith200(url) {
   try {
@@ -21,8 +31,10 @@ function openWindow(targetAddress) {
   };
   chrome.windows.create(
     createData,
-    (window) => windowId = window.id
-  );
+    (window) => {
+      windowId = window.id;
+      toggleToolbar();
+    });
 }
 
 function setNA(targetAddress) {
@@ -51,14 +63,15 @@ function checkStatus(config) {
   }
 
   if(unavailableAddresses.length > 0) {
+    errors = unavailableAddresses;
     setNA(config.targetAddress);
   }
   else {
+    errors = null;
     setOK();
   }
 }
 
-var interval = null;
 function poll() {
   clearInterval(interval);
   chrome.storage.local.get({
@@ -75,4 +88,13 @@ function poll() {
 }
 
 chrome.browserAction.onClicked.addListener(() => chrome.runtime.openOptionsPage());
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.name == 'overlay-initialized'){
+      console.log('UPDATE OVERLAY');
+      setTimeout(() => {
+        chrome.tabs.sendMessage(sender.tab.id, { name: 'overlay-errors', errors: errors });
+      }, 1000);
+    }
+  });
 poll();

@@ -15,6 +15,18 @@
     "128": "icons/disco-stu-128.png"
   },
 
+  "web_accessible_resources": [
+    "toolbar/ui.html"
+  ],
+
+  "content_scripts": [
+    {
+      "js": ["contentScript.js"],
+      "run_at": "document_idle",
+      "matches": ["<all_urls>"]
+    }
+  ],
+
   "background": {
     "scripts": ["background.js"]
   },
