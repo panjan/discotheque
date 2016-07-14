@@ -1,14 +1,20 @@
 'use strict';
 
 var windowId = null;
+var tabId = null;
 var interval = null;
 var errors = null;
 
+chrome.tabs.onUpdated.addListener(function(id, changeInfo, tab) {
+  if (tabId === null) return;
+  if (id === tabId && changeInfo.status == 'complete') {
+    chrome.tabs.sendMessage(tabId, { name: 'toggle-in-page-toolbar' });
+  }
+});
+
 function toggleToolbar() {
   chrome.tabs.getSelected(windowId, (tab) => {
-    setTimeout(() => {
-      chrome.tabs.sendMessage(tab.id, { name: 'toggle-in-page-toolbar' });
-    }, 2000);
+    tabId = tab.id;
   });
 }
 
